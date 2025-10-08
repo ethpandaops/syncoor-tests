@@ -1,9 +1,9 @@
 name: Syncoor
 
 on:
-  schedule:
-    - cron: '30 10 1-31/2 * *' # Every odd day at 10h 30m (Fullnode runs)
-    - cron: '30 10 2-30/2 * *' # Every even day at 10h 30m (Supernode runs)
+  #schedule:
+    #- cron: '30 10 1-31/2 * *' # Every odd day at 10h 30m (Fullnode runs)
+    #- cron: '30 10 2-30/2 * *' # Every even day at 10h 30m (Supernode runs)
   workflow_dispatch:
     inputs:
       el-client:
@@ -21,21 +21,6 @@ on:
         required: false
         default: '1800'
         type: string
-      cl-synctype:
-        description: 'Consensus layer sync type ("checkpoint", "genesis")'
-        required: false
-        default: '"checkpoint"'
-        type: string
-      checkpoint-sync-url:
-        description: 'Checkpoint sync URL. Will be auto generated if not provided. (Example: https://checkpoint-sync.$NETWORK.ethpandaops.io)'
-        required: false
-        default: ''
-        type: string
-      cl-nodetype:
-        description: 'Consensus layer client type ("fullnode", "supernode")'
-        required: false
-        default: '"fullnode"'
-        type: string
       image:
         description: 'Syncoor Docker image'
         required: false
@@ -46,30 +31,39 @@ on:
         required: false
         default: ''
         type: string
-      el-image:
-        description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
+      config:
+        description: 'Configuration JSON'
         required: false
+        # network: Network to test (e.g., holesky, mainnet)
+        # consensus.syncType: checkpoint or genesis
+        # consensus.nodeType: fullnode or supernode
+        # consensus.checkpointSyncURL: Checkpoint sync URL (auto-generated based on network if not provided)
         default: >-
           {
-            "besu": "hyperledger/besu:25.9.0",
-            "geth": "ethereum/client-go:v1.16.4",
-            "erigon": "erigontech/erigon:v3.2.0-rc1",
-            "nethermind": "nethermind/nethermind:1.34.0",
-            "reth": "ghcr.io/paradigmxyz/reth:v1.8.2",
-            "nimbusel": "ethpandaops/nimbus-eth1:master"
-          }
-        type: string
-      cl-image:
-        description: 'Consensus layer client images as JSON (e.g., {"lighthouse": "sigp/lighthouse:latest", "teku": "consensys/teku:latest"})'
-        required: false
-        default: >-
-          {
-            "lighthouse": "sigp/lighthouse:v8.0.0-rc.0",
-            "teku": "consensys/teku:25.9.3",
-            "prysm": "gcr.io/offchainlabs/prysm/beacon-chain:v6.1.1",
-            "nimbus": "statusim/nimbus-eth2:multiarch-v25.9.2",
-            "lodestar": "chainsafe/lodestar:v1.35.0-rc.1",
-            "grandine": "sifrai/grandine:2.0.0.rc0"
+            "network": "holesky",
+            "execution": {
+              "images": {
+                "besu": "hyperledger/besu:25.9.0",
+                "geth": "ethereum/client-go:v1.16.4",
+                "erigon": "erigontech/erigon:v3.2.0-rc1",
+                "nethermind": "nethermind/nethermind:1.34.0",
+                "reth": "ghcr.io/paradigmxyz/reth:v1.8.2",
+                "nimbusel": "ethpandaops/nimbus-eth1:master"
+              }
+            },
+            "consensus": {
+              "images": {
+                "lighthouse": "sigp/lighthouse:v8.0.0-rc.0",
+                "teku": "consensys/teku:25.9.3",
+                "prysm": "gcr.io/offchainlabs/prysm/beacon-chain:v6.1.1",
+                "nimbus": "statusim/nimbus-eth2:multiarch-v25.9.2",
+                "lodestar": "chainsafe/lodestar:v1.35.0-rc.1",
+                "grandine": "sifrai/grandine:2.0.0.rc0"
+              },
+              "syncType": "checkpoint",
+              "nodeType": "fullnode",
+              "checkpointSyncURL": ""
+            }
           }
         type: string
 
@@ -97,7 +91,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        network: ["holesky"]
+        network: >-
+          ${{
+            github.event_name == 'schedule' && fromJSON('["holesky"]') ||
+            fromJSON(format('[{0}]', fromJSON(inputs.config || '{}').network || '"holesky"'))
+          }}
         el-client: >-
           ${{
             fromJSON(format('[{0}]', inputs.el-client || '
@@ -123,12 +121,12 @@ jobs:
             (github.event.schedule == '30 10 1-31/2 * *' && fromJSON('["fullnode"]') ||
              github.event.schedule == '30 10 2-30/2 * *' && fromJSON('["supernode"]') ||
              fromJSON('["fullnode","supernode"]')) ||
-            fromJSON(format('[{0}]', inputs.cl-nodetype || '"fullnode","supernode"'))
+            fromJSON(format('[{0}]', fromJSON(inputs.config || '{}').consensus.nodeType || '"fullnode","supernode"'))
           }}
         cl-synctype: >-
           ${{
             github.event_name == 'schedule' && fromJSON('["checkpoint"]') ||
-            fromJSON(format('[{0}]', inputs.cl-synctype || '"checkpoint","genesis"'))
+            fromJSON(format('[{0}]', fromJSON(inputs.config || '{}').consensus.syncType || '"checkpoint","genesis"'))
           }}
 
     steps:
@@ -163,28 +161,61 @@ jobs:
     - name: Prepare inputs
       id: prepare
       env:
-        EL_IMAGES: ${{ github.event_name == 'schedule' && steps.default-images.outputs.el-images || inputs.el-image }}
-        CL_IMAGES: ${{ github.event_name == 'schedule' && steps.default-images.outputs.cl-images || inputs.cl-image }}
+        CONFIG: ${{ github.event_name == 'schedule' && '{}' || inputs.config || '{}' }}
       run: |
         set -x
-        # Parse EL image for current client
-        if [ "$EL_IMAGES" != '{}' ] && [ -n "$EL_IMAGES" ]; then
-          EL_IMAGE=$(echo "$EL_IMAGES" | jq -r --arg client "${{ matrix.el-client }}" '.[$client] // ""')
-          echo "el-image=$EL_IMAGE" >> $GITHUB_OUTPUT
+        # Parse config JSON
+        if [ "$CONFIG" != '{}' ] && [ -n "$CONFIG" ]; then
+          # Extract EL images from config
+          EL_IMAGES=$(echo "$CONFIG" | jq -r '.execution.images // {}')
+          if [ "$EL_IMAGES" != '{}' ] && [ "$EL_IMAGES" != 'null' ]; then
+            EL_IMAGE=$(echo "$EL_IMAGES" | jq -r --arg client "${{ matrix.el-client }}" '.[$client] // ""')
+            echo "el-image=$EL_IMAGE" >> $GITHUB_OUTPUT
+          else
+            echo "el-image=" >> $GITHUB_OUTPUT
+          fi
+
+          # Extract CL images from config
+          CL_IMAGES=$(echo "$CONFIG" | jq -r '.consensus.images // {}')
+          if [ "$CL_IMAGES" != '{}' ] && [ "$CL_IMAGES" != 'null' ]; then
+            CL_IMAGE=$(echo "$CL_IMAGES" | jq -r --arg client "${{ matrix.cl-client }}" '.[$client] // ""')
+            echo "cl-image=$CL_IMAGE" >> $GITHUB_OUTPUT
+          else
+            echo "cl-image=" >> $GITHUB_OUTPUT
+          fi
         else
-          echo "el-image=" >> $GITHUB_OUTPUT
+          # Fallback to default images for scheduled runs
+          EL_IMAGES=${{ steps.default-images.outputs.el-images }}
+          CL_IMAGES=${{ steps.default-images.outputs.cl-images }}
+
+          # Parse EL image for current client
+          if [ "$EL_IMAGES" != '{}' ] && [ -n "$EL_IMAGES" ]; then
+            EL_IMAGE=$(echo "$EL_IMAGES" | jq -r --arg client "${{ matrix.el-client }}" '.[$client] // ""')
+            echo "el-image=$EL_IMAGE" >> $GITHUB_OUTPUT
+          else
+            echo "el-image=" >> $GITHUB_OUTPUT
+          fi
+
+          # Parse CL image for current client
+          if [ "$CL_IMAGES" != '{}' ] && [ -n "$CL_IMAGES" ]; then
+            CL_IMAGE=$(echo "$CL_IMAGES" | jq -r --arg client "${{ matrix.cl-client }}" '.[$client] // ""')
+            echo "cl-image=$CL_IMAGE" >> $GITHUB_OUTPUT
+          else
+            echo "cl-image=" >> $GITHUB_OUTPUT
+          fi
         fi
 
-        # Parse CL image for current client
-        if [ "$CL_IMAGES" != '{}' ] && [ -n "$CL_IMAGES" ]; then
-          CL_IMAGE=$(echo "$CL_IMAGES" | jq -r --arg client "${{ matrix.cl-client }}" '.[$client] // ""')
-          echo "cl-image=$CL_IMAGE" >> $GITHUB_OUTPUT
-        else
-          echo "cl-image=" >> $GITHUB_OUTPUT
-        fi
+        NETWORK="${{ matrix.network }}"
 
-        # Generate checkpoint sync URL based on network
-        CHECKPOINT_SYNC_URL="https://checkpoint-sync.${{ matrix.network }}.ethpandaops.io"
+        # Generate checkpoint sync URL based on network or use from config
+        if [ "$CONFIG" != '{}' ] && [ -n "$CONFIG" ]; then
+          CHECKPOINT_SYNC_URL=$(echo "$CONFIG" | jq -r '.consensus.checkpointSyncURL // ""')
+          if [ -z "$CHECKPOINT_SYNC_URL" ] || [ "$CHECKPOINT_SYNC_URL" = "null" ]; then
+            CHECKPOINT_SYNC_URL="https://checkpoint-sync.${NETWORK}.ethpandaops.io"
+          fi
+        else
+          CHECKPOINT_SYNC_URL="https://checkpoint-sync.${NETWORK}.ethpandaops.io"
+        fi
         echo "checkpoint-sync-url=$CHECKPOINT_SYNC_URL" >> $GITHUB_OUTPUT
 
         # Set checkpoint sync enabled based on cl-synctype
@@ -196,11 +227,11 @@ jobs:
         echo "checkpoint-sync-enabled=$CHECKPOINT_SYNC_ENABLED" >> $GITHUB_OUTPUT
 
         # Generate syncoor server address based on network
-        SERVER_URL="https://syncoor-api.${{ matrix.network }}.ethpandaops.io"
+        SERVER_URL="https://syncoor-api.${NETWORK}.ethpandaops.io"
         echo "syncoor-server-url=$SERVER_URL" >> $GITHUB_OUTPUT
 
         # Generate S3 path based on network, cl-nodetype, and checkpoint sync
-        S3_PATH="networks/${{ matrix.network }}"
+        S3_PATH="networks/${NETWORK}"
         if [ "${{ matrix.cl-nodetype }}" = "supernode" ]; then
           S3_PATH="${S3_PATH}-clsupernode"
         fi
@@ -242,7 +273,7 @@ jobs:
         rclone-config: ${{ secrets.SYNCOOR_RCLONE_CONFIG }}
         rclone-version: ${{ env.INSTALL_RCLONE_VERSION }}
         checkpoint-sync-enabled: ${{ steps.prepare.outputs.checkpoint-sync-enabled }}
-        checkpoint-sync-url: ${{ inputs.checkpoint-sync-url || steps.prepare.outputs.checkpoint-sync-url }}
+        checkpoint-sync-url: ${{ steps.prepare.outputs.checkpoint-sync-url }}
         supernode: ${{ matrix.cl-nodetype == 'supernode' }}
         image: ${{ inputs.image || 'docker.ethquokkaops.io/dh/ethpandaops/syncoor:master' }}
         git-ref: ${{ inputs.git-ref }}
