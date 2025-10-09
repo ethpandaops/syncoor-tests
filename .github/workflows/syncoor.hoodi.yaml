@@ -1,4 +1,4 @@
-name: Hoodi
+name: Syncoor - Hoodi
 on:
   workflow_dispatch:
   #schedule:
