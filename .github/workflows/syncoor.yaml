@@ -40,7 +40,7 @@ on:
         # consensus.checkpointSyncURL: Checkpoint sync URL (auto-generated based on network if not provided)
         default: >-
           {
-            "network": "holesky",
+            "network": "hoodi",
             "execution": {
               "images": {
                 "besu": "hyperledger/besu:25.9.0",
@@ -94,7 +94,7 @@ jobs:
         network: >-
           ${{
             github.event_name == 'schedule' && fromJSON('["holesky"]') ||
-            fromJSON(format('["{0}"]', fromJSON(inputs.config || '{}').network || 'holesky'))
+            fromJSON(format('["{0}"]', fromJSON(inputs.config || '{}').network || 'hoodi'))
           }}
         el-client: >-
           ${{
