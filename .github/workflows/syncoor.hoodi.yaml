@@ -40,7 +40,7 @@ jobs:
               ref: 'master',
               inputs: {
                 'run-timeout': '360',
-                'config': '
+                'config': `
                   {
                     "network": "${{ env.NETWORK }}",
                     "consensus": {
@@ -52,6 +52,6 @@ jobs:
                       "images": ${{ env.EL_IMAGES }}
                     }
                   }
-                '
+                `
               }
             });
