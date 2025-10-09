@@ -39,8 +39,8 @@ jobs:
               workflow_id: 'syncoor.yaml',
               ref: 'master',
               inputs: {
-                run-timeout: '360',
-                config: '
+                'run-timeout': '360',
+                'config': '
                   {
                     "network": "${{ env.NETWORK }}",
                     "consensus": {
