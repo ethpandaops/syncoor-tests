@@ -29,7 +29,42 @@ jobs:
   trigger-syncoor:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      - name: Check for running workflows with same network
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        id: check-running
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: >-
+            const { data: workflows } = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'syncoor.yaml',
+              status: 'in_progress',
+              per_page: 100
+            });
+
+            const network = "${{ env.NETWORK }}";
+            const runningWorkflows = workflows.workflow_runs.filter(run => {
+              try {
+                const config = JSON.parse(run.inputs?.config || '{}');
+                return config.network === network;
+              } catch (e) {
+                return false;
+              }
+            });
+
+            console.log(`Found ${runningWorkflows.length} running workflows for network: ${network}`);
+            if (runningWorkflows.length > 0) {
+              console.log('Skipping dispatch - workflow already running for this network');
+              core.setOutput('should_skip', 'true');
+            } else {
+              console.log('No running workflows found - proceeding with dispatch');
+              core.setOutput('should_skip', 'false');
+            }
+
+      - name: Dispatch workflow
+        if: steps.check-running.outputs.should_skip == 'false'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: >-
