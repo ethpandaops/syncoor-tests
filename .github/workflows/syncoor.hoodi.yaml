@@ -2,7 +2,7 @@ name: Syncoor - Hoodi
 on:
   workflow_dispatch:
   schedule:
-    - cron: "35 10 * * *" # Every Day at 10:35 AM UTC
+    - cron: "35 10 * * *" # Every Day at 10:35 UTC
 
 env:
   NETWORK: "hoodi"

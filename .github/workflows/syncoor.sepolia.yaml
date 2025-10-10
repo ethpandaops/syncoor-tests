@@ -2,8 +2,7 @@ name: Syncoor - Sepolia
 on:
   workflow_dispatch:
   schedule:
-    - cron: "35 15 * * *" # Every Day at 15:35 AM UTC
-
+    - cron: "35 15 * * *" # Every Day at 15:35 UTC
 env:
   NETWORK: "sepolia"
   EL_IMAGES: >-
