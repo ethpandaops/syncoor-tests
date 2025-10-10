@@ -43,22 +43,46 @@ jobs:
               per_page: 100
             });
 
-            const network = "${{ env.NETWORK }}";
-            const runningWorkflows = workflows.workflow_runs.filter(run => {
-              try {
-                const config = JSON.parse(run.inputs?.config || '{}');
-                return config.network === network;
-              } catch (e) {
-                return false;
-              }
+            const { data: queuedWorkflows } = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'syncoor.yaml',
+              status: 'queued',
+              per_page: 100
             });
 
-            console.log(`Found ${runningWorkflows.length} running workflows for network: ${network}`);
+            const allWorkflows = [...workflows.workflow_runs, ...queuedWorkflows.workflow_runs];
+
+            const network = "${{ env.NETWORK }}";
+            let runningWorkflows = [];
+
+            // Check each workflow run's jobs to see if any contain the network name
+            for (const run of allWorkflows) {
+              try {
+                const { data: jobs } = await github.rest.actions.listJobsForWorkflowRun({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  run_id: run.id
+                });
+
+                const hasNetworkJob = jobs.jobs.some(job =>
+                  job.name && job.name.includes(`(${network},`)
+                );
+
+                if (hasNetworkJob) {
+                  runningWorkflows.push(run);
+                }
+              } catch (e) {
+                console.log(`Error checking jobs for run ${run.id}: ${e.message}`);
+              }
+            }
+
+            console.log(`Found ${runningWorkflows.length} running/queued workflows for network: ${network}`);
             if (runningWorkflows.length > 0) {
-              console.log('Skipping dispatch - workflow already running for this network');
+              console.log('Skipping dispatch - workflow already running or queued for this network');
               core.setOutput('should_skip', 'true');
             } else {
-              console.log('No running workflows found - proceeding with dispatch');
+              console.log('No running or queued workflows found - proceeding with dispatch');
               core.setOutput('should_skip', 'false');
             }
 
