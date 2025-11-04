@@ -31,7 +31,7 @@ on:
       config:
         description: 'Configuration JSON'
         required: false
-        # network: Network to test (e.g., holesky, mainnet)
+        # network: Network to test (e.g., hoodi, mainnet)
         # consensus.syncType: checkpoint or genesis
         # consensus.nodeType: fullnode or supernode
         # consensus.checkpointSyncURL: Checkpoint sync URL (auto-generated based on network if not provided)
