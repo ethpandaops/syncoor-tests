@@ -13,7 +13,7 @@ on:
         required: false
         default: '"lighthouse","teku","prysm","nimbus","lodestar","grandine"'
         type: string
-      run-timeout:
+      run-timeout-minutes:
         description: 'Timeout for the sync test (in minutes)'
         required: false
         default: '1800'
@@ -78,7 +78,7 @@ jobs:
     # - 24h -> 1440m
     # - 48h -> 2880m
     # - 72h -> 4320m
-    timeout-minutes: ${{ fromJSON(inputs.run-timeout || '1800') }}
+    timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes || '1800') }}
     runs-on:
       group: synctest
       labels: Disk2TB
@@ -188,8 +188,8 @@ jobs:
         echo "s3-path=$S3_PATH" >> $GITHUB_OUTPUT
 
         # Calculate timeout (subtract 10 minutes)
-        TIMEOUT=$(( ${{ fromJSON(inputs.run-timeout || '1800') }} - 10 ))
-        echo "run-timeout=$TIMEOUT" >> $GITHUB_OUTPUT
+        TIMEOUT=$(( ${{ fromJSON(inputs.run-timeout-minutes || '1800') }} - 10 ))
+        echo "run-timeout-minutes=$TIMEOUT" >> $GITHUB_OUTPUT
 
     - name: Run Syncoor Test
       uses: ethpandaops/syncoor@master
@@ -212,7 +212,7 @@ jobs:
             '[]'
           }}
         check-interval: 30s
-        run-timeout: ${{ steps.prepare.outputs.run-timeout }}m
+        run-timeout-minutes: ${{ steps.prepare.outputs.run-timeout-minutes }}m
         log-level: info
         s3-upload: true
         s3-bucket: ${{ env.S3_BUCKET }}
