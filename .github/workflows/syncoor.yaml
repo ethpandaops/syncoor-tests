@@ -212,7 +212,7 @@ jobs:
             '[]'
           }}
         check-interval: 30s
-        run-timeout-minutes: ${{ steps.prepare.outputs.run-timeout-minutes }}m
+        run-timeout: ${{ steps.prepare.outputs.run-timeout-minutes }}m
         log-level: info
         s3-upload: true
         s3-bucket: ${{ env.S3_BUCKET }}
