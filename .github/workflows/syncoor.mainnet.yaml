@@ -1,0 +1,86 @@
+name: Syncoor - Mainnet
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "35 15 * * 1" # Every Monday at 15:35 UTC
+env:
+  NETWORK: "mainnet"
+  EL_IMAGES: >-
+    {
+      "besu": "hyperledger/besu:latest",
+      "geth": "ethereum/client-go:stable",
+      "erigon": "erigontech/erigon:latest",
+      "nethermind": "nethermind/nethermind:latest",
+      "reth": "ghcr.io/paradigmxyz/reth:latest",
+      "nimbusel": "ethpandaops/nimbus-eth1:master"
+    }
+  CL_IMAGES: >-
+    {
+      "lighthouse": "sigp/lighthouse:latest",
+      "teku": "consensys/teku:latest",
+      "prysm": "gcr.io/offchainlabs/prysm/beacon-chain:stable",
+      "nimbus": "statusim/nimbus-eth2:multiarch-latest",
+      "lodestar": "chainsafe/lodestar:latest",
+      "grandine": "sifrai/grandine:stable"
+    }
+
+jobs:
+  trigger-syncoor-fullnode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: >-
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'syncoor.yaml',
+              ref: 'master',
+              inputs: {
+                'run-timeout-minutes': '1380',
+                'config': `
+                  {
+                    "network": "${{ env.NETWORK }}",
+                    "consensus": {
+                      "syncType": "checkpoint",
+                      "nodeType": "fullnode",
+                      "images": ${{ env.CL_IMAGES }}
+                    },
+                    "execution": {
+                      "images": ${{ env.EL_IMAGES }}
+                    }
+                  }
+                `
+              }
+            });
+
+  trigger-syncoor-supernode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: >-
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'syncoor.yaml',
+              ref: 'master',
+              inputs: {
+                'run-timeout-minutes': '1380',
+                'config': `
+                  {
+                    "network": "${{ env.NETWORK }}",
+                    "consensus": {
+                      "syncType": "checkpoint",
+                      "nodeType": "supernode",
+                      "images": ${{ env.CL_IMAGES }}
+                    },
+                    "execution": {
+                      "images": ${{ env.EL_IMAGES }}
+                    }
+                  }
+                `
+              }
+            });
