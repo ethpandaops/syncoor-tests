@@ -45,6 +45,7 @@ jobs:
                     "consensus": {
                       "syncType": "checkpoint",
                       "nodeType": "fullnode",
+                      "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
                       "images": ${{ env.CL_IMAGES }}
                     },
                     "execution": {
@@ -75,6 +76,7 @@ jobs:
                     "consensus": {
                       "syncType": "checkpoint",
                       "nodeType": "supernode",
+                      "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
                       "images": ${{ env.CL_IMAGES }}
                     },
                     "execution": {
