@@ -63,6 +63,11 @@ on:
             }
           }
         type: string
+      runs-on:
+        description: 'Runner configuration (JSON). Examples: "ubuntu-latest", {"group": "synctest", "labels": "Disk2TB"}'
+        required: false
+        default: '{"group": "synctest", "labels": "Disk2TB"}'
+        type: string
 
 env:
   INSTALL_RCLONE_VERSION: v1.68.2
@@ -79,9 +84,7 @@ jobs:
     # - 48h -> 2880m
     # - 72h -> 4320m
     timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes || '1800') }}
-    runs-on:
-      group: synctest
-      labels: Disk2TB
+    runs-on: ${{ fromJSON(inputs.runs-on || '{"group": "synctest", "labels": "Disk2TB"}') }}
     concurrency:
       group: >-
         ${{ github.event_name }}-${{ matrix.network }}-${{ matrix.el-client }}-${{ matrix.cl-client }}-${{ matrix.cl-nodetype }}-${{ matrix.cl-synctype }}
