@@ -84,7 +84,8 @@ jobs:
     # - 48h -> 2880m
     # - 72h -> 4320m
     timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes || '1800') }}
-    runs-on: ${{ fromJSON(inputs.runs-on || '{"group": "synctest", "labels": "Disk2TB"}') }}
+    runs-on: >-
+      ${{ fromJSON(inputs.runs-on || '{"group": "synctest", "labels": "Disk2TB"}') }}
     concurrency:
       group: >-
         ${{ github.event_name }}-${{ matrix.network }}-${{ matrix.el-client }}-${{ matrix.cl-client }}-${{ matrix.cl-nodetype }}-${{ matrix.cl-synctype }}
