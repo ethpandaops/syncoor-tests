@@ -1,0 +1,186 @@
+# Geth combinations for Sepolia network
+- id: sync-test-sepolia-geth-lighthouse
+  name: Sync Test (Sepolia) - geth/lighthouse
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: geth
+    cl-client: lighthouse
+  inputs:
+    run-timeout-minutes: "900"
+    el-client: '"geth"'
+    cl-client: '"lighthouse"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "lighthouse": "sigp/lighthouse:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "geth": "ethereum/client-go:stable"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-geth-teku
+  name: Sync Test (Sepolia) - geth/teku
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: geth
+    cl-client: teku
+  inputs:
+    run-timeout-minutes: "900"
+    el-client: '"geth"'
+    cl-client: '"teku"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "teku": "consensys/teku:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "geth": "ethereum/client-go:stable"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-geth-prysm
+  name: Sync Test (Sepolia) - geth/prysm
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: geth
+    cl-client: prysm
+  inputs:
+    run-timeout-minutes: "900"
+    el-client: '"geth"'
+    cl-client: '"prysm"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "prysm": "gcr.io/offchainlabs/prysm/beacon-chain:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "geth": "ethereum/client-go:stable"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-geth-nimbus
+  name: Sync Test (Sepolia) - geth/nimbus
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: geth
+    cl-client: nimbus
+  inputs:
+    run-timeout-minutes: "900"
+    el-client: '"geth"'
+    cl-client: '"nimbus"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "nimbus": "statusim/nimbus-eth2:multiarch-latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "geth": "ethereum/client-go:stable"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-geth-lodestar
+  name: Sync Test (Sepolia) - geth/lodestar
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: geth
+    cl-client: lodestar
+  inputs:
+    run-timeout-minutes: "900"
+    el-client: '"geth"'
+    cl-client: '"lodestar"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "lodestar": "chainsafe/lodestar:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "geth": "ethereum/client-go:stable"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-geth-grandine
+  name: Sync Test (Sepolia) - geth/grandine
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: geth
+    cl-client: grandine
+  inputs:
+    run-timeout-minutes: "900"
+    el-client: '"geth"'
+    cl-client: '"grandine"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "grandine": "sifrai/grandine:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "geth": "ethereum/client-go:stable"
+          }
+        }
+      }

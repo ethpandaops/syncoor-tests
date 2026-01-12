@@ -1,0 +1,186 @@
+# Besu combinations for Sepolia network
+- id: sync-test-sepolia-besu-lighthouse
+  name: Sync Test (Sepolia) - besu/lighthouse
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: besu
+    cl-client: lighthouse
+  inputs:
+    run-timeout-minutes: "900"
+    el-client: '"besu"'
+    cl-client: '"lighthouse"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "lighthouse": "sigp/lighthouse:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "besu": "hyperledger/besu:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-besu-teku
+  name: Sync Test (Sepolia) - besu/teku
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: besu
+    cl-client: teku
+  inputs:
+    run-timeout-minutes: "900"
+    el-client: '"besu"'
+    cl-client: '"teku"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "teku": "consensys/teku:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "besu": "hyperledger/besu:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-besu-prysm
+  name: Sync Test (Sepolia) - besu/prysm
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: besu
+    cl-client: prysm
+  inputs:
+    run-timeout-minutes: "900"
+    el-client: '"besu"'
+    cl-client: '"prysm"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "prysm": "gcr.io/offchainlabs/prysm/beacon-chain:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "besu": "hyperledger/besu:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-besu-nimbus
+  name: Sync Test (Sepolia) - besu/nimbus
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: besu
+    cl-client: nimbus
+  inputs:
+    run-timeout-minutes: "900"
+    el-client: '"besu"'
+    cl-client: '"nimbus"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "nimbus": "statusim/nimbus-eth2:multiarch-latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "besu": "hyperledger/besu:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-besu-lodestar
+  name: Sync Test (Sepolia) - besu/lodestar
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: besu
+    cl-client: lodestar
+  inputs:
+    run-timeout-minutes: "900"
+    el-client: '"besu"'
+    cl-client: '"lodestar"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "lodestar": "chainsafe/lodestar:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "besu": "hyperledger/besu:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-besu-grandine
+  name: Sync Test (Sepolia) - besu/grandine
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: besu
+    cl-client: grandine
+  inputs:
+    run-timeout-minutes: "900"
+    el-client: '"besu"'
+    cl-client: '"grandine"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "grandine": "sifrai/grandine:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "besu": "hyperledger/besu:latest"
+          }
+        }
+      }

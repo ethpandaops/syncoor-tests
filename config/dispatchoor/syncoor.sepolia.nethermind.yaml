@@ -1,0 +1,186 @@
+# Nethermind combinations for Sepolia network
+- id: sync-test-sepolia-nethermind-lighthouse
+  name: Sync Test (Sepolia) - nethermind/lighthouse
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: nethermind
+    cl-client: lighthouse
+  inputs:
+    run-timeout-minutes: "780"
+    el-client: '"nethermind"'
+    cl-client: '"lighthouse"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "lighthouse": "sigp/lighthouse:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "nethermind": "nethermind/nethermind:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-nethermind-teku
+  name: Sync Test (Sepolia) - nethermind/teku
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: nethermind
+    cl-client: teku
+  inputs:
+    run-timeout-minutes: "780"
+    el-client: '"nethermind"'
+    cl-client: '"teku"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "teku": "consensys/teku:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "nethermind": "nethermind/nethermind:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-nethermind-prysm
+  name: Sync Test (Sepolia) - nethermind/prysm
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: nethermind
+    cl-client: prysm
+  inputs:
+    run-timeout-minutes: "780"
+    el-client: '"nethermind"'
+    cl-client: '"prysm"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "prysm": "gcr.io/offchainlabs/prysm/beacon-chain:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "nethermind": "nethermind/nethermind:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-nethermind-nimbus
+  name: Sync Test (Sepolia) - nethermind/nimbus
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: nethermind
+    cl-client: nimbus
+  inputs:
+    run-timeout-minutes: "780"
+    el-client: '"nethermind"'
+    cl-client: '"nimbus"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "nimbus": "statusim/nimbus-eth2:multiarch-latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "nethermind": "nethermind/nethermind:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-nethermind-lodestar
+  name: Sync Test (Sepolia) - nethermind/lodestar
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: nethermind
+    cl-client: lodestar
+  inputs:
+    run-timeout-minutes: "780"
+    el-client: '"nethermind"'
+    cl-client: '"lodestar"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "lodestar": "chainsafe/lodestar:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "nethermind": "nethermind/nethermind:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-nethermind-grandine
+  name: Sync Test (Sepolia) - nethermind/grandine
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: nethermind
+    cl-client: grandine
+  inputs:
+    run-timeout-minutes: "780"
+    el-client: '"nethermind"'
+    cl-client: '"grandine"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "grandine": "sifrai/grandine:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "nethermind": "nethermind/nethermind:latest"
+          }
+        }
+      }
