@@ -1,0 +1,186 @@
+# Reth combinations for Sepolia network
+- id: sync-test-sepolia-reth-lighthouse
+  name: Sync Test (Sepolia) - reth/lighthouse
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: reth
+    cl-client: lighthouse
+  inputs:
+    run-timeout-minutes: "1800"
+    el-client: '"reth"'
+    cl-client: '"lighthouse"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "lighthouse": "sigp/lighthouse:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "reth": "ghcr.io/paradigmxyz/reth:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-reth-teku
+  name: Sync Test (Sepolia) - reth/teku
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: reth
+    cl-client: teku
+  inputs:
+    run-timeout-minutes: "1800"
+    el-client: '"reth"'
+    cl-client: '"teku"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "teku": "consensys/teku:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "reth": "ghcr.io/paradigmxyz/reth:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-reth-prysm
+  name: Sync Test (Sepolia) - reth/prysm
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: reth
+    cl-client: prysm
+  inputs:
+    run-timeout-minutes: "1800"
+    el-client: '"reth"'
+    cl-client: '"prysm"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "prysm": "gcr.io/offchainlabs/prysm/beacon-chain:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "reth": "ghcr.io/paradigmxyz/reth:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-reth-nimbus
+  name: Sync Test (Sepolia) - reth/nimbus
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: reth
+    cl-client: nimbus
+  inputs:
+    run-timeout-minutes: "1800"
+    el-client: '"reth"'
+    cl-client: '"nimbus"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "nimbus": "statusim/nimbus-eth2:multiarch-latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "reth": "ghcr.io/paradigmxyz/reth:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-reth-lodestar
+  name: Sync Test (Sepolia) - reth/lodestar
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: reth
+    cl-client: lodestar
+  inputs:
+    run-timeout-minutes: "1800"
+    el-client: '"reth"'
+    cl-client: '"lodestar"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "lodestar": "chainsafe/lodestar:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "reth": "ghcr.io/paradigmxyz/reth:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-reth-grandine
+  name: Sync Test (Sepolia) - reth/grandine
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: reth
+    cl-client: grandine
+  inputs:
+    run-timeout-minutes: "1800"
+    el-client: '"reth"'
+    cl-client: '"grandine"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "grandine": "sifrai/grandine:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "reth": "ghcr.io/paradigmxyz/reth:latest"
+          }
+        }
+      }
