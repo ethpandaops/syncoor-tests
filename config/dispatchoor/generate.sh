@@ -15,7 +15,7 @@ EL_CLIENTS=("besu" "erigon" "geth" "nethermind" "reth")
 declare -A NETWORK_CL_CLIENTS
 NETWORK_CL_CLIENTS["hoodi"]="lighthouse teku prysm nimbus lodestar grandine"
 NETWORK_CL_CLIENTS["sepolia"]="lighthouse teku prysm nimbus lodestar grandine"
-NETWORK_CL_CLIENTS["mainnet"]="lighthouse"
+NETWORK_CL_CLIENTS["mainnet"]="lighthouse teku prysm nimbus lodestar grandine"
 
 # EL client container images
 declare -A EL_IMAGES
