@@ -31,3 +31,168 @@
           }
         }
       }
+
+- id: sync-test-mainnet-reth-teku
+  name: Sync Test (Mainnet) - reth/teku
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: reth
+    cl-client: teku
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "2880"
+    el-client: '"reth"'
+    cl-client: '"teku"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "teku": "consensys/teku:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "reth": "ghcr.io/paradigmxyz/reth:latest"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-reth-prysm
+  name: Sync Test (Mainnet) - reth/prysm
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: reth
+    cl-client: prysm
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "2880"
+    el-client: '"reth"'
+    cl-client: '"prysm"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "prysm": "gcr.io/offchainlabs/prysm/beacon-chain:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "reth": "ghcr.io/paradigmxyz/reth:latest"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-reth-nimbus
+  name: Sync Test (Mainnet) - reth/nimbus
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: reth
+    cl-client: nimbus
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "2880"
+    el-client: '"reth"'
+    cl-client: '"nimbus"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "nimbus": "statusim/nimbus-eth2:multiarch-latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "reth": "ghcr.io/paradigmxyz/reth:latest"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-reth-lodestar
+  name: Sync Test (Mainnet) - reth/lodestar
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: reth
+    cl-client: lodestar
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "2880"
+    el-client: '"reth"'
+    cl-client: '"lodestar"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "lodestar": "chainsafe/lodestar:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "reth": "ghcr.io/paradigmxyz/reth:latest"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-reth-grandine
+  name: Sync Test (Mainnet) - reth/grandine
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: reth
+    cl-client: grandine
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "2880"
+    el-client: '"reth"'
+    cl-client: '"grandine"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "grandine": "sifrai/grandine:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "reth": "ghcr.io/paradigmxyz/reth:latest"
+          }
+        }
+      }

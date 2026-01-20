@@ -31,3 +31,168 @@
           }
         }
       }
+
+- id: sync-test-mainnet-nethermind-teku
+  name: Sync Test (Mainnet) - nethermind/teku
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: nethermind
+    cl-client: teku
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "360"
+    el-client: '"nethermind"'
+    cl-client: '"teku"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "teku": "consensys/teku:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "nethermind": "nethermind/nethermind:latest"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-nethermind-prysm
+  name: Sync Test (Mainnet) - nethermind/prysm
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: nethermind
+    cl-client: prysm
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "360"
+    el-client: '"nethermind"'
+    cl-client: '"prysm"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "prysm": "gcr.io/offchainlabs/prysm/beacon-chain:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "nethermind": "nethermind/nethermind:latest"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-nethermind-nimbus
+  name: Sync Test (Mainnet) - nethermind/nimbus
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: nethermind
+    cl-client: nimbus
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "360"
+    el-client: '"nethermind"'
+    cl-client: '"nimbus"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "nimbus": "statusim/nimbus-eth2:multiarch-latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "nethermind": "nethermind/nethermind:latest"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-nethermind-lodestar
+  name: Sync Test (Mainnet) - nethermind/lodestar
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: nethermind
+    cl-client: lodestar
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "360"
+    el-client: '"nethermind"'
+    cl-client: '"lodestar"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "lodestar": "chainsafe/lodestar:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "nethermind": "nethermind/nethermind:latest"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-nethermind-grandine
+  name: Sync Test (Mainnet) - nethermind/grandine
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: nethermind
+    cl-client: grandine
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "360"
+    el-client: '"nethermind"'
+    cl-client: '"grandine"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "grandine": "sifrai/grandine:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "nethermind": "nethermind/nethermind:latest"
+          }
+        }
+      }

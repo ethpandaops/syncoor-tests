@@ -31,3 +31,168 @@
           }
         }
       }
+
+- id: sync-test-mainnet-geth-teku
+  name: Sync Test (Mainnet) - geth/teku
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: geth
+    cl-client: teku
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "720"
+    el-client: '"geth"'
+    cl-client: '"teku"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "teku": "consensys/teku:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "geth": "ethereum/client-go:stable"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-geth-prysm
+  name: Sync Test (Mainnet) - geth/prysm
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: geth
+    cl-client: prysm
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "720"
+    el-client: '"geth"'
+    cl-client: '"prysm"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "prysm": "gcr.io/offchainlabs/prysm/beacon-chain:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "geth": "ethereum/client-go:stable"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-geth-nimbus
+  name: Sync Test (Mainnet) - geth/nimbus
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: geth
+    cl-client: nimbus
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "720"
+    el-client: '"geth"'
+    cl-client: '"nimbus"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "nimbus": "statusim/nimbus-eth2:multiarch-latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "geth": "ethereum/client-go:stable"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-geth-lodestar
+  name: Sync Test (Mainnet) - geth/lodestar
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: geth
+    cl-client: lodestar
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "720"
+    el-client: '"geth"'
+    cl-client: '"lodestar"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "lodestar": "chainsafe/lodestar:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "geth": "ethereum/client-go:stable"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-geth-grandine
+  name: Sync Test (Mainnet) - geth/grandine
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: geth
+    cl-client: grandine
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "720"
+    el-client: '"geth"'
+    cl-client: '"grandine"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "grandine": "sifrai/grandine:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "geth": "ethereum/client-go:stable"
+          }
+        }
+      }
