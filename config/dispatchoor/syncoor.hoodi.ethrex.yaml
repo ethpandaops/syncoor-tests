@@ -1,21 +1,21 @@
-# Reth combinations for Sepolia network
-- id: sync-test-sepolia-reth-lighthouse
-  name: Sync Test (Sepolia) - reth/lighthouse
+# Ethrex combinations for Hoodi network
+- id: sync-test-hoodi-ethrex-lighthouse
+  name: Sync Test (Hoodi) - ethrex/lighthouse
   owner: ethpandaops
   repo: syncoor-tests
   workflow_id: syncoor.yaml
   ref: master
   labels:
-    network: sepolia
-    el-client: reth
+    network: hoodi
+    el-client: ethrex
     cl-client: lighthouse
   inputs:
-    run-timeout-minutes: "2880"
-    el-client: '"reth"'
+    run-timeout-minutes: "1440"
+    el-client: '"ethrex"'
     cl-client: '"lighthouse"'
     config: >-
       {
-        "network": "sepolia",
+        "network": "hoodi",
         "consensus": {
           "syncType": "checkpoint",
           "nodeType": "fullnode",
@@ -25,28 +25,28 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:nightly"
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
           }
         }
       }
 
-- id: sync-test-sepolia-reth-teku
-  name: Sync Test (Sepolia) - reth/teku
+- id: sync-test-hoodi-ethrex-teku
+  name: Sync Test (Hoodi) - ethrex/teku
   owner: ethpandaops
   repo: syncoor-tests
   workflow_id: syncoor.yaml
   ref: master
   labels:
-    network: sepolia
-    el-client: reth
+    network: hoodi
+    el-client: ethrex
     cl-client: teku
   inputs:
-    run-timeout-minutes: "2880"
-    el-client: '"reth"'
+    run-timeout-minutes: "1440"
+    el-client: '"ethrex"'
     cl-client: '"teku"'
     config: >-
       {
-        "network": "sepolia",
+        "network": "hoodi",
         "consensus": {
           "syncType": "checkpoint",
           "nodeType": "fullnode",
@@ -56,28 +56,28 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:nightly"
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
           }
         }
       }
 
-- id: sync-test-sepolia-reth-prysm
-  name: Sync Test (Sepolia) - reth/prysm
+- id: sync-test-hoodi-ethrex-prysm
+  name: Sync Test (Hoodi) - ethrex/prysm
   owner: ethpandaops
   repo: syncoor-tests
   workflow_id: syncoor.yaml
   ref: master
   labels:
-    network: sepolia
-    el-client: reth
+    network: hoodi
+    el-client: ethrex
     cl-client: prysm
   inputs:
-    run-timeout-minutes: "2880"
-    el-client: '"reth"'
+    run-timeout-minutes: "1440"
+    el-client: '"ethrex"'
     cl-client: '"prysm"'
     config: >-
       {
-        "network": "sepolia",
+        "network": "hoodi",
         "consensus": {
           "syncType": "checkpoint",
           "nodeType": "fullnode",
@@ -87,28 +87,28 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:nightly"
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
           }
         }
       }
 
-- id: sync-test-sepolia-reth-nimbus
-  name: Sync Test (Sepolia) - reth/nimbus
+- id: sync-test-hoodi-ethrex-nimbus
+  name: Sync Test (Hoodi) - ethrex/nimbus
   owner: ethpandaops
   repo: syncoor-tests
   workflow_id: syncoor.yaml
   ref: master
   labels:
-    network: sepolia
-    el-client: reth
+    network: hoodi
+    el-client: ethrex
     cl-client: nimbus
   inputs:
-    run-timeout-minutes: "2880"
-    el-client: '"reth"'
+    run-timeout-minutes: "1440"
+    el-client: '"ethrex"'
     cl-client: '"nimbus"'
     config: >-
       {
-        "network": "sepolia",
+        "network": "hoodi",
         "consensus": {
           "syncType": "checkpoint",
           "nodeType": "fullnode",
@@ -118,28 +118,28 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:nightly"
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
           }
         }
       }
 
-- id: sync-test-sepolia-reth-lodestar
-  name: Sync Test (Sepolia) - reth/lodestar
+- id: sync-test-hoodi-ethrex-lodestar
+  name: Sync Test (Hoodi) - ethrex/lodestar
   owner: ethpandaops
   repo: syncoor-tests
   workflow_id: syncoor.yaml
   ref: master
   labels:
-    network: sepolia
-    el-client: reth
+    network: hoodi
+    el-client: ethrex
     cl-client: lodestar
   inputs:
-    run-timeout-minutes: "2880"
-    el-client: '"reth"'
+    run-timeout-minutes: "1440"
+    el-client: '"ethrex"'
     cl-client: '"lodestar"'
     config: >-
       {
-        "network": "sepolia",
+        "network": "hoodi",
         "consensus": {
           "syncType": "checkpoint",
           "nodeType": "fullnode",
@@ -149,28 +149,28 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:nightly"
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
           }
         }
       }
 
-- id: sync-test-sepolia-reth-grandine
-  name: Sync Test (Sepolia) - reth/grandine
+- id: sync-test-hoodi-ethrex-grandine
+  name: Sync Test (Hoodi) - ethrex/grandine
   owner: ethpandaops
   repo: syncoor-tests
   workflow_id: syncoor.yaml
   ref: master
   labels:
-    network: sepolia
-    el-client: reth
+    network: hoodi
+    el-client: ethrex
     cl-client: grandine
   inputs:
-    run-timeout-minutes: "2880"
-    el-client: '"reth"'
+    run-timeout-minutes: "1440"
+    el-client: '"ethrex"'
     cl-client: '"grandine"'
     config: >-
       {
-        "network": "sepolia",
+        "network": "hoodi",
         "consensus": {
           "syncType": "checkpoint",
           "nodeType": "fullnode",
@@ -180,7 +180,7 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:nightly"
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
           }
         }
       }

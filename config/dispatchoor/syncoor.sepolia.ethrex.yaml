@@ -1,17 +1,17 @@
-# Reth combinations for Sepolia network
-- id: sync-test-sepolia-reth-lighthouse
-  name: Sync Test (Sepolia) - reth/lighthouse
+# Ethrex combinations for Sepolia network
+- id: sync-test-sepolia-ethrex-lighthouse
+  name: Sync Test (Sepolia) - ethrex/lighthouse
   owner: ethpandaops
   repo: syncoor-tests
   workflow_id: syncoor.yaml
   ref: master
   labels:
     network: sepolia
-    el-client: reth
+    el-client: ethrex
     cl-client: lighthouse
   inputs:
     run-timeout-minutes: "2880"
-    el-client: '"reth"'
+    el-client: '"ethrex"'
     cl-client: '"lighthouse"'
     config: >-
       {
@@ -25,24 +25,24 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:nightly"
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
           }
         }
       }
 
-- id: sync-test-sepolia-reth-teku
-  name: Sync Test (Sepolia) - reth/teku
+- id: sync-test-sepolia-ethrex-teku
+  name: Sync Test (Sepolia) - ethrex/teku
   owner: ethpandaops
   repo: syncoor-tests
   workflow_id: syncoor.yaml
   ref: master
   labels:
     network: sepolia
-    el-client: reth
+    el-client: ethrex
     cl-client: teku
   inputs:
     run-timeout-minutes: "2880"
-    el-client: '"reth"'
+    el-client: '"ethrex"'
     cl-client: '"teku"'
     config: >-
       {
@@ -56,24 +56,24 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:nightly"
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
           }
         }
       }
 
-- id: sync-test-sepolia-reth-prysm
-  name: Sync Test (Sepolia) - reth/prysm
+- id: sync-test-sepolia-ethrex-prysm
+  name: Sync Test (Sepolia) - ethrex/prysm
   owner: ethpandaops
   repo: syncoor-tests
   workflow_id: syncoor.yaml
   ref: master
   labels:
     network: sepolia
-    el-client: reth
+    el-client: ethrex
     cl-client: prysm
   inputs:
     run-timeout-minutes: "2880"
-    el-client: '"reth"'
+    el-client: '"ethrex"'
     cl-client: '"prysm"'
     config: >-
       {
@@ -87,24 +87,24 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:nightly"
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
           }
         }
       }
 
-- id: sync-test-sepolia-reth-nimbus
-  name: Sync Test (Sepolia) - reth/nimbus
+- id: sync-test-sepolia-ethrex-nimbus
+  name: Sync Test (Sepolia) - ethrex/nimbus
   owner: ethpandaops
   repo: syncoor-tests
   workflow_id: syncoor.yaml
   ref: master
   labels:
     network: sepolia
-    el-client: reth
+    el-client: ethrex
     cl-client: nimbus
   inputs:
     run-timeout-minutes: "2880"
-    el-client: '"reth"'
+    el-client: '"ethrex"'
     cl-client: '"nimbus"'
     config: >-
       {
@@ -118,24 +118,24 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:nightly"
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
           }
         }
       }
 
-- id: sync-test-sepolia-reth-lodestar
-  name: Sync Test (Sepolia) - reth/lodestar
+- id: sync-test-sepolia-ethrex-lodestar
+  name: Sync Test (Sepolia) - ethrex/lodestar
   owner: ethpandaops
   repo: syncoor-tests
   workflow_id: syncoor.yaml
   ref: master
   labels:
     network: sepolia
-    el-client: reth
+    el-client: ethrex
     cl-client: lodestar
   inputs:
     run-timeout-minutes: "2880"
-    el-client: '"reth"'
+    el-client: '"ethrex"'
     cl-client: '"lodestar"'
     config: >-
       {
@@ -149,24 +149,24 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:nightly"
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
           }
         }
       }
 
-- id: sync-test-sepolia-reth-grandine
-  name: Sync Test (Sepolia) - reth/grandine
+- id: sync-test-sepolia-ethrex-grandine
+  name: Sync Test (Sepolia) - ethrex/grandine
   owner: ethpandaops
   repo: syncoor-tests
   workflow_id: syncoor.yaml
   ref: master
   labels:
     network: sepolia
-    el-client: reth
+    el-client: ethrex
     cl-client: grandine
   inputs:
     run-timeout-minutes: "2880"
-    el-client: '"reth"'
+    el-client: '"ethrex"'
     cl-client: '"grandine"'
     config: >-
       {
@@ -180,7 +180,7 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:nightly"
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
           }
         }
       }

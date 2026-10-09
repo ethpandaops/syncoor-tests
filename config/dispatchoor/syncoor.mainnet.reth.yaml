@@ -11,7 +11,7 @@
     cl-client: lighthouse
   inputs:
     runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
-    run-timeout-minutes: "2880"
+    run-timeout-minutes: "5760"
     el-client: '"reth"'
     cl-client: '"lighthouse"'
     config: >-
@@ -44,7 +44,7 @@
     cl-client: teku
   inputs:
     runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
-    run-timeout-minutes: "2880"
+    run-timeout-minutes: "5760"
     el-client: '"reth"'
     cl-client: '"teku"'
     config: >-
@@ -77,7 +77,7 @@
     cl-client: prysm
   inputs:
     runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
-    run-timeout-minutes: "2880"
+    run-timeout-minutes: "5760"
     el-client: '"reth"'
     cl-client: '"prysm"'
     config: >-
@@ -110,7 +110,7 @@
     cl-client: nimbus
   inputs:
     runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
-    run-timeout-minutes: "2880"
+    run-timeout-minutes: "5760"
     el-client: '"reth"'
     cl-client: '"nimbus"'
     config: >-
@@ -143,7 +143,7 @@
     cl-client: lodestar
   inputs:
     runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
-    run-timeout-minutes: "2880"
+    run-timeout-minutes: "5760"
     el-client: '"reth"'
     cl-client: '"lodestar"'
     config: >-
@@ -176,7 +176,7 @@
     cl-client: grandine
   inputs:
     runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
-    run-timeout-minutes: "2880"
+    run-timeout-minutes: "5760"
     el-client: '"reth"'
     cl-client: '"grandine"'
     config: >-

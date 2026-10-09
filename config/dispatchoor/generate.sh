@@ -9,7 +9,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 NETWORKS=("hoodi" "sepolia" "mainnet")
 
 # Execution Layer clients
-EL_CLIENTS=("besu" "erigon" "geth" "nethermind" "reth")
+EL_CLIENTS=("besu" "erigon" "ethrex" "geth" "nethermind" "reth")
 
 # Consensus Layer clients per network
 declare -A NETWORK_CL_CLIENTS
@@ -21,9 +21,11 @@ NETWORK_CL_CLIENTS["mainnet"]="lighthouse teku prysm nimbus lodestar grandine"
 declare -A EL_IMAGES
 EL_IMAGES["besu"]="hyperledger/besu:latest"
 EL_IMAGES["erigon"]="erigontech/erigon:latest"
+EL_IMAGES["ethrex"]="ghcr.io/lambdaclass/ethrex:latest"
 EL_IMAGES["geth"]="ethereum/client-go:stable"
 EL_IMAGES["nethermind"]="nethermind/nethermind:latest"
 EL_IMAGES["reth"]="ghcr.io/paradigmxyz/reth:latest"
+EL_IMAGES["sepolia:reth"]="ghcr.io/paradigmxyz/reth:nightly"
 
 # CL client container images
 declare -A CL_IMAGES
@@ -38,21 +40,24 @@ CL_IMAGES["grandine"]="sifrai/grandine:stable"
 declare -A TIMEOUTS
 TIMEOUTS["hoodi:besu"]=$((3*60))
 TIMEOUTS["hoodi:erigon"]=$((4*60))
+TIMEOUTS["hoodi:ethrex"]=$((24*60))
 TIMEOUTS["hoodi:geth"]=$((3*60))
 TIMEOUTS["hoodi:nethermind"]=$((23*60))
-TIMEOUTS["hoodi:reth"]=$((18*60))
+TIMEOUTS["hoodi:reth"]=$((24*60))
 
 TIMEOUTS["sepolia:besu"]=$((15*60))
 TIMEOUTS["sepolia:erigon"]=$((15*60))
+TIMEOUTS["sepolia:ethrex"]=$((48*60))
 TIMEOUTS["sepolia:geth"]=$((15*60))
 TIMEOUTS["sepolia:nethermind"]=$((13*60))
-TIMEOUTS["sepolia:reth"]=$((30*60))
+TIMEOUTS["sepolia:reth"]=$((48*60))
 
 TIMEOUTS["mainnet:besu"]=$((24*60))
 TIMEOUTS["mainnet:erigon"]=$((20*60))
+TIMEOUTS["mainnet:ethrex"]=$((96*60))
 TIMEOUTS["mainnet:geth"]=$((12*60))
 TIMEOUTS["mainnet:nethermind"]=$((6*60))
-TIMEOUTS["mainnet:reth"]=$((48*60))
+TIMEOUTS["mainnet:reth"]=$((96*60))
 
 # Mainnet checkpoint sync URL
 MAINNET_CHECKPOINT_URL="https://mainnet-checkpoint-sync.attestant.io"
@@ -70,7 +75,7 @@ generate_entry() {
     local is_first="$4"
 
     local timeout="${TIMEOUTS[$network:$el_client]}"
-    local el_image="${EL_IMAGES[$el_client]}"
+    local el_image="${EL_IMAGES[$network:$el_client]:-${EL_IMAGES[$el_client]}}"
     local cl_image="${CL_IMAGES[$cl_client]}"
     local network_cap=$(capitalize "$network")
 
