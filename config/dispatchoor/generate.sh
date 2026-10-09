@@ -25,6 +25,7 @@ EL_IMAGES["ethrex"]="ghcr.io/lambdaclass/ethrex:latest"
 EL_IMAGES["geth"]="ethereum/client-go:stable"
 EL_IMAGES["nethermind"]="nethermind/nethermind:latest"
 EL_IMAGES["reth"]="ghcr.io/paradigmxyz/reth:latest"
+EL_IMAGES["sepolia:reth"]="ghcr.io/paradigmxyz/reth:nightly"
 
 # CL client container images
 declare -A CL_IMAGES
@@ -74,7 +75,7 @@ generate_entry() {
     local is_first="$4"
 
     local timeout="${TIMEOUTS[$network:$el_client]}"
-    local el_image="${EL_IMAGES[$el_client]}"
+    local el_image="${EL_IMAGES[$network:$el_client]:-${EL_IMAGES[$el_client]}}"
     local cl_image="${CL_IMAGES[$cl_client]}"
     local network_cap=$(capitalize "$network")
 

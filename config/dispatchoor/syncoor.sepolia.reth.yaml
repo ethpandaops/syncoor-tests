@@ -25,7 +25,7 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:latest"
+            "reth": "ghcr.io/paradigmxyz/reth:nightly"
           }
         }
       }
@@ -56,7 +56,7 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:latest"
+            "reth": "ghcr.io/paradigmxyz/reth:nightly"
           }
         }
       }
@@ -87,7 +87,7 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:latest"
+            "reth": "ghcr.io/paradigmxyz/reth:nightly"
           }
         }
       }
@@ -118,7 +118,7 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:latest"
+            "reth": "ghcr.io/paradigmxyz/reth:nightly"
           }
         }
       }
@@ -149,7 +149,7 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:latest"
+            "reth": "ghcr.io/paradigmxyz/reth:nightly"
           }
         }
       }
@@ -180,7 +180,7 @@
         },
         "execution": {
           "images": {
-            "reth": "ghcr.io/paradigmxyz/reth:latest"
+            "reth": "ghcr.io/paradigmxyz/reth:nightly"
           }
         }
       }
