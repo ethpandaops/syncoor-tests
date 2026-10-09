@@ -1,0 +1,198 @@
+# Ethrex with Lighthouse for Mainnet network
+- id: sync-test-mainnet-ethrex-lighthouse
+  name: Sync Test (Mainnet) - ethrex/lighthouse
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: ethrex
+    cl-client: lighthouse
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "2880"
+    el-client: '"ethrex"'
+    cl-client: '"lighthouse"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "lighthouse": "sigp/lighthouse:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-ethrex-teku
+  name: Sync Test (Mainnet) - ethrex/teku
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: ethrex
+    cl-client: teku
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "2880"
+    el-client: '"ethrex"'
+    cl-client: '"teku"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "teku": "consensys/teku:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-ethrex-prysm
+  name: Sync Test (Mainnet) - ethrex/prysm
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: ethrex
+    cl-client: prysm
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "2880"
+    el-client: '"ethrex"'
+    cl-client: '"prysm"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "prysm": "gcr.io/offchainlabs/prysm/beacon-chain:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-ethrex-nimbus
+  name: Sync Test (Mainnet) - ethrex/nimbus
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: ethrex
+    cl-client: nimbus
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "2880"
+    el-client: '"ethrex"'
+    cl-client: '"nimbus"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "nimbus": "statusim/nimbus-eth2:multiarch-latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-ethrex-lodestar
+  name: Sync Test (Mainnet) - ethrex/lodestar
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: ethrex
+    cl-client: lodestar
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "2880"
+    el-client: '"ethrex"'
+    cl-client: '"lodestar"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "lodestar": "chainsafe/lodestar:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
+          }
+        }
+      }
+
+- id: sync-test-mainnet-ethrex-grandine
+  name: Sync Test (Mainnet) - ethrex/grandine
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: mainnet
+    el-client: ethrex
+    cl-client: grandine
+  inputs:
+    runs-on: '{"group": "synctest", "labels": "Disk4TB"}'
+    run-timeout-minutes: "2880"
+    el-client: '"ethrex"'
+    cl-client: '"grandine"'
+    config: >-
+      {
+        "network": "mainnet",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "checkpointSyncURL": "https://mainnet-checkpoint-sync.attestant.io",
+          "images": {
+            "grandine": "sifrai/grandine:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
+          }
+        }
+      }

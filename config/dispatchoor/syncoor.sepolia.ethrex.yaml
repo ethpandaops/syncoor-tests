@@ -1,0 +1,186 @@
+# Ethrex combinations for Sepolia network
+- id: sync-test-sepolia-ethrex-lighthouse
+  name: Sync Test (Sepolia) - ethrex/lighthouse
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: ethrex
+    cl-client: lighthouse
+  inputs:
+    run-timeout-minutes: "1800"
+    el-client: '"ethrex"'
+    cl-client: '"lighthouse"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "lighthouse": "sigp/lighthouse:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-ethrex-teku
+  name: Sync Test (Sepolia) - ethrex/teku
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: ethrex
+    cl-client: teku
+  inputs:
+    run-timeout-minutes: "1800"
+    el-client: '"ethrex"'
+    cl-client: '"teku"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "teku": "consensys/teku:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-ethrex-prysm
+  name: Sync Test (Sepolia) - ethrex/prysm
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: ethrex
+    cl-client: prysm
+  inputs:
+    run-timeout-minutes: "1800"
+    el-client: '"ethrex"'
+    cl-client: '"prysm"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "prysm": "gcr.io/offchainlabs/prysm/beacon-chain:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-ethrex-nimbus
+  name: Sync Test (Sepolia) - ethrex/nimbus
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: ethrex
+    cl-client: nimbus
+  inputs:
+    run-timeout-minutes: "1800"
+    el-client: '"ethrex"'
+    cl-client: '"nimbus"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "nimbus": "statusim/nimbus-eth2:multiarch-latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-ethrex-lodestar
+  name: Sync Test (Sepolia) - ethrex/lodestar
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: ethrex
+    cl-client: lodestar
+  inputs:
+    run-timeout-minutes: "1800"
+    el-client: '"ethrex"'
+    cl-client: '"lodestar"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "lodestar": "chainsafe/lodestar:latest"
+          }
+        },
+        "execution": {
+          "images": {
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
+          }
+        }
+      }
+
+- id: sync-test-sepolia-ethrex-grandine
+  name: Sync Test (Sepolia) - ethrex/grandine
+  owner: ethpandaops
+  repo: syncoor-tests
+  workflow_id: syncoor.yaml
+  ref: master
+  labels:
+    network: sepolia
+    el-client: ethrex
+    cl-client: grandine
+  inputs:
+    run-timeout-minutes: "1800"
+    el-client: '"ethrex"'
+    cl-client: '"grandine"'
+    config: >-
+      {
+        "network": "sepolia",
+        "consensus": {
+          "syncType": "checkpoint",
+          "nodeType": "fullnode",
+          "images": {
+            "grandine": "sifrai/grandine:stable"
+          }
+        },
+        "execution": {
+          "images": {
+            "ethrex": "ghcr.io/lambdaclass/ethrex:latest"
+          }
+        }
+      }
