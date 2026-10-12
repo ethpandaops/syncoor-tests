@@ -1,0 +1,27 @@
+{
+  "default": 1800,
+  "hoodi": {
+    "besu": 180,
+    "erigon": 240,
+    "ethrex": 1440,
+    "geth": 180,
+    "nethermind": 1380,
+    "reth": 2160
+  },
+  "sepolia": {
+    "besu": 900,
+    "erigon": 900,
+    "ethrex": 2880,
+    "geth": 900,
+    "nethermind": 780,
+    "reth": 2880
+  },
+  "mainnet": {
+    "besu": 1440,
+    "erigon": 1200,
+    "ethrex": 5760,
+    "geth": 720,
+    "nethermind": 360,
+    "reth": 5760
+  }
+}
