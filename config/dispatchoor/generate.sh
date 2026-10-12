@@ -36,29 +36,6 @@ CL_IMAGES["nimbus"]="statusim/nimbus-eth2:multiarch-latest"
 CL_IMAGES["lodestar"]="chainsafe/lodestar:latest"
 CL_IMAGES["grandine"]="sifrai/grandine:stable"
 
-# Timeouts per network and EL client (hours * 60 = minutes)
-declare -A TIMEOUTS
-TIMEOUTS["hoodi:besu"]=$((3*60))
-TIMEOUTS["hoodi:erigon"]=$((4*60))
-TIMEOUTS["hoodi:ethrex"]=$((24*60))
-TIMEOUTS["hoodi:geth"]=$((3*60))
-TIMEOUTS["hoodi:nethermind"]=$((23*60))
-TIMEOUTS["hoodi:reth"]=$((24*60))
-
-TIMEOUTS["sepolia:besu"]=$((15*60))
-TIMEOUTS["sepolia:erigon"]=$((15*60))
-TIMEOUTS["sepolia:ethrex"]=$((48*60))
-TIMEOUTS["sepolia:geth"]=$((15*60))
-TIMEOUTS["sepolia:nethermind"]=$((13*60))
-TIMEOUTS["sepolia:reth"]=$((48*60))
-
-TIMEOUTS["mainnet:besu"]=$((24*60))
-TIMEOUTS["mainnet:erigon"]=$((20*60))
-TIMEOUTS["mainnet:ethrex"]=$((96*60))
-TIMEOUTS["mainnet:geth"]=$((12*60))
-TIMEOUTS["mainnet:nethermind"]=$((6*60))
-TIMEOUTS["mainnet:reth"]=$((96*60))
-
 # Mainnet checkpoint sync URL
 MAINNET_CHECKPOINT_URL="https://mainnet-checkpoint-sync.attestant.io"
 
@@ -74,7 +51,6 @@ generate_entry() {
     local cl_client="$3"
     local is_first="$4"
 
-    local timeout="${TIMEOUTS[$network:$el_client]}"
     local el_image="${EL_IMAGES[$network:$el_client]:-${EL_IMAGES[$el_client]}}"
     local cl_image="${CL_IMAGES[$cl_client]}"
     local network_cap=$(capitalize "$network")
@@ -101,7 +77,6 @@ generate_entry() {
         echo "    runs-on: '{\"group\": \"synctest\", \"labels\": \"Disk4TB\"}'"
     fi
 
-    echo "    run-timeout-minutes: \"${timeout}\""
     echo "    el-client: '\"${el_client}\"'"
     echo "    cl-client: '\"${cl_client}\"'"
 
