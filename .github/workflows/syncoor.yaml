@@ -222,7 +222,7 @@ jobs:
             (matrix.el-client == 'reth' && matrix.network == 'sepolia') && '["--full","--snap.v2"]' ||
             (matrix.el-client == 'reth') && '["--full"]' ||
             (matrix.el-client == 'erigon') && '["--prune.mode=full"]' ||
-            (matrix.el-client == 'besu' && matrix.network == 'sepolia') && '["--Xsnap2-enabled=true"]' ||
+            (matrix.el-client == 'besu' && matrix.network == 'sepolia') && '["--sync-mode=SNAP2"]' ||
             (matrix.el-client == 'geth' && matrix.network == 'sepolia') && '["--snap.v2"]' ||
             '[]'
           }}
